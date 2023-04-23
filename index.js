@@ -37,6 +37,9 @@ app.get('/get_forecast', (req, res) => {
   );
 });
 
+app.get('/', (req, res) => {
+  res.send('Weather Integration microservice')
+})
 
 app.listen(port, () => {
   console.log(`Weather Integration app listening on port ${port}`)
