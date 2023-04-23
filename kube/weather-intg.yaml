@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: weather-intg
+spec:
+  selector:
+    app: weather-intg
+  ports:
+    - port: 5005
+      targetPort: 5005
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weather-intg
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weather-intg
+  template:
+    metadata:
+      labels:
+        app: weather-intg
+    spec:
+      containers:
+        - name: weather-intg
+          image: meghnabits/weather-intg:latest
+          ports:
+            - containerPort: 5005
+          imagePullPolicy: Always
